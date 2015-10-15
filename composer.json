@@ -1,0 +1,28 @@
+{
+    "name": "bluehaoran/annotate",
+    "description": "A quick way to retrieve a bible verse and annotate it.",
+    "type": "application",
+    "license": "Unlicense",
+    "authors": [
+        {
+            "name": "Haoran Un",
+            "email": "haoran@untoyou.net"
+        }
+    ],
+    "require": {},
+    "repositories": {
+		"Simple-HTML5-Drawing-App": {
+			"type":"package",
+			"package": {
+				"name": "williammalone/Simple-HTML5-Drawing-App",
+				"version":"1.0.0",
+				"source": {
+					"url":"https://github.com/williammalone/Simple-HTML5-Drawing-App",
+					"type":"git",
+					"reference":"f22fb06effa43e50d6dabdb7df046f6848cb8c7c"
+				}
+			}
+		}
+
+    }
+}
