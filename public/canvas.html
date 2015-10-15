@@ -67,21 +67,60 @@
             <p class="text-center">
               I want to annotate 
                 <select name="book" id="book" title="select a chapter">
-                  <option>[John]</option>
+                  <option value="Matthew">Matthew</option>
+                  <option value="Mark">Mark</option>
+                  <option value="Luke">Luke</option>
+                  <option value="John">John</option>
                 </select>
               
                 <select name="chapter" id="chapter" title="select a chapter">
-                  <option>[3]</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
                 </select>
               :
                 <select name="verse" id="verse" title="select one or more verses">
-                  <option>[16]</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
                 </select>
 
               in the 
               
                 <select name="translation" id="translation">
-                  <option>[NIV]</option>
+                  <option value="NET">NET</option>
                 </select>
 
                 <!-- [TODO: add multiple verses] -->
@@ -149,6 +188,49 @@
     <script>
 
 $(document).ready(function() {
+
+  var verse = {
+    book: 'John',
+    chapter: '3',
+    verse: '16',
+    transalation: 'NET'
+  };
+
+  $('#book').change(function() {
+    verse.book = $(this).val();
+    updateVerse();
+  });
+  $('#chapter').change(function() {
+    verse.chapter = $(this).val();
+    updateVerse();
+  });
+  $('#verse').change(function() {
+    verse.verse = $(this).val();
+    updateVerse();
+  });
+  $('#translation').change(function() {
+    verse.translation = $(this).val();
+    updateVerse();
+  });
+
+  var updateVerse = function() {
+
+    var endpoint;
+    var payload = {};
+
+    if (verse.translation === 'NET') {
+      //E.g: 'http://labs.bible.org/api/?passage=John%203:16';
+      endpoint = 'http://labs.bible.org/api/?passage=' + verse.book + '%20' + verse.chapter + ':' +verse.verse + '&type=json&formatting=full';
+    } else {
+      //TODO
+    }
+
+    $.get(endpoint, payload, function(data) {
+      console.log(data);
+      $('#text').html(data[0].text);
+    }, 'json');
+
+  };
 
 });
 
